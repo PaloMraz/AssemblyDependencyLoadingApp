@@ -2,15 +2,15 @@
 `TestContracts` assembly exposes the `ITracer` interface.
 
 # TestLibrary
-TestLibrary has dependecy on TestContracts, implements the ITracer interface and has also a dependency on Elastic.Clients.Elasticsearch NuGet package, 
-which in turn has transitive dependency on System.Text.Json v8.0.5 NuGet package (cotaining the System.Text.Json.dll assembly version 8.0.0.0).
+`TestLibrary` has dependecy on `TestContracts`, implements the `ITracer` interface and has also a dependency on `Elastic.Clients.Elasticsearch` NuGet package,
+which in turn has transitive dependency on `System.Text.Json` v8.0.5 NuGet package (cotaining the `System.Text.Json.dll` assembly version 8.0.0.0).
 
 # TestReferenceApp
-TestReferenceApp references TestContracts and TestLibrary and the build publishes TestReferenceApp to PublishedApp folder using "dotnet publish".
+`TestReferenceApp` references `TestContracts` and `TestLibrary` and the build publishes `TestReferenceApp` to `PublishedApp` folder using `dotnet publish`.
 
 # TestApp
-TestApp has dependecy only on TestContracts, it loads the TestLibrary assembly dynamically using Assembly.LoadFrom from the TestReferenceApp\PublishedApp
-folder and then creates an instance of the Tracer class casting it to the ITracer interface. When invoking the Tracer.Trace method, the following exception is thrown:
+`TestApp` has dependecy only on `TestContracts`, it loads the `TestLibrary` assembly dynamically using `Assembly.LoadFrom` from the `TestReferenceApp\PublishedApp`
+folder and then creates an instance of the `Tracer` class casting it to the `ITracer` interface. When invoking the `Tracer.Trace` method, the following exception is thrown:
 
 ```C#
 System.IO.FileLoadException
