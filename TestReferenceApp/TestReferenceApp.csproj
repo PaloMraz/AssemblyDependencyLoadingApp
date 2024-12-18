@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TestContracts\TestContracts.csproj" />
+    <ProjectReference Include="..\TestLibrary\TestLibrary.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="dotnet publish $(MSBuildProjectFile) --no-build --no-restore --no-self-contained --configuration Debug --output .\PublishedApp" />
+  </Target>
+
+</Project>

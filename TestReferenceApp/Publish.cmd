@@ -1,0 +1,1 @@
+dotnet publish TestReferenceApp.csproj --no-build --no-restore --no-self-contained --configuration Debug --output .\PublishedApp
