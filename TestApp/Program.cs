@@ -3,9 +3,12 @@ using System.IO;
 using System.Reflection;
 using TestContracts;
 
-// From TestApp\bin\Debug\net7.0 to TestReferenceApp\PublishedApp :-)
+Console.WriteLine($"Running on CLR {Environment.Version}");
+
+// From TestApp\bin\Debug\net7.0 to appropriate subfolder of TestReferenceApp :-)
+string publishedAppFolderName = (Environment.Version.Major < 7) ? "PublishedAppNet461" : "PublishedAppNet70";
 string solutionFolderPath = new DirectoryInfo(Path.GetDirectoryName(typeof(Program).Assembly.Location)!).Parent!.Parent!.Parent!.Parent!.FullName;
-string dllFilePath = Path.Combine(solutionFolderPath, "TestReferenceApp", "PublishedApp", "TestLibrary.dll");
+string dllFilePath = Path.Combine(solutionFolderPath, "TestReferenceApp", publishedAppFolderName, "TestLibrary.dll");
 
 Console.WriteLine($"Press ENTER to load '{dllFilePath}'");
 Console.ReadLine();

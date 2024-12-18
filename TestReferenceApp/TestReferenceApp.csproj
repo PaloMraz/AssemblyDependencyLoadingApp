@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net7.0;net461</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,12 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="dotnet publish $(MSBuildProjectFile) --no-build --no-restore --no-self-contained --configuration Debug --output .\PublishedApp" />
+    <Exec 
+      Condition=" '$(TargetFramework)' == 'net7.0' "
+      Command="dotnet publish $(MSBuildProjectFile) -f net7.0 --no-build --no-restore --no-self-contained --configuration Debug --output .\PublishedAppNet70" />
+    <Exec
+      Condition=" '$(TargetFramework)' == 'net461' "
+      Command="dotnet publish $(MSBuildProjectFile) -f net461 --no-build --no-restore --no-self-contained --configuration Debug --output .\PublishedAppNet461" />
   </Target>
 
 </Project>

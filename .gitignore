@@ -17,7 +17,8 @@
 mono_crash.*
 
 # Build results
-PublishedApp/
+PublishedAppNet461/
+PublishedAppNet70/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
