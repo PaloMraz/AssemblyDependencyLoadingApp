@@ -7,15 +7,15 @@ using TestContracts;
 string solutionFolderPath = new DirectoryInfo(Path.GetDirectoryName(typeof(Program).Assembly.Location)!).Parent!.Parent!.Parent!.Parent!.FullName;
 string dllFilePath = Path.Combine(solutionFolderPath, "TestReferenceApp", "PublishedApp", "TestLibrary.dll");
 
-Console.WriteLine($"Press ENTER to load {dllFilePath}");
+Console.WriteLine($"Press ENTER to load '{dllFilePath}'");
 Console.ReadLine();
 
 Assembly assembly = Assembly.LoadFrom(dllFilePath);
-Console.WriteLine($"{assembly.FullName} loaded\nPress ENTER to create TestLibrary.Tracer instance");
+Console.WriteLine($"'{assembly.FullName}' loaded\nPress ENTER to create TestLibrary.Tracer instance");
 Console.ReadLine();
 
 ITracer? tracer = assembly.CreateInstance("TestLibrary.Tracer") as ITracer;
-Console.WriteLine($"{tracer?.GetType().FullName} instance created\nPress ENTER to call Trace");
+Console.WriteLine($"'{tracer?.GetType().FullName}' instance created\nPress ENTER to call Trace");
 Console.ReadLine();
 
 tracer?.Trace("Hello, World!");

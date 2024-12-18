@@ -1,15 +1,18 @@
-TestContracts assembly exposes the ITracer interface.
+# TestContracts
+`TestContracts` assembly exposes the `ITracer` interface.
 
+# TestLibrary
 TestLibrary has dependecy on TestContracts, implements the ITracer interface and has also a dependency on Elastic.Clients.Elasticsearch NuGet package, 
 which in turn has transitive dependency on System.Text.Json v8.0.5 NuGet package (cotaining the System.Text.Json.dll assembly version 8.0.0.0).
 
-TestReferenceApp references TestContracts and TestLibrary and building it publishes TestReferenceApp to PublishedApp folder using "dotnet publish"
+# TestReferenceApp
+TestReferenceApp references TestContracts and TestLibrary and the build publishes TestReferenceApp to PublishedApp folder using "dotnet publish".
 
+# TestApp
+TestApp has dependecy only on TestContracts, it loads the TestLibrary assembly dynamically using Assembly.LoadFrom from the TestReferenceApp\PublishedApp
+folder and then creates an instance of the Tracer class casting it to the ITracer interface. When invoking the Tracer.Trace method, the following exception is thrown:
 
-creates an instance of the Tracer class casting it to the ITracer interface and invokes the Tracer.Trace method.
-TestApp has dependecy only on TestContracts, loads the TestLibrary assembly dynamically using Assembly.LoadFrom and then creates an instance
-of the Tracer class casting it to the ITracer interface. When invoking the Tracer.Trace method, the following exception is thrown:
-
+```C#
 System.IO.FileLoadException
   HResult=0x80131621
   Message=Could not load file or assembly 'System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'. Could not find or load a specific file. (0x80131621)
@@ -31,3 +34,4 @@ System.IO.FileLoadException
 
 Inner Exception 1:
 FileLoadException: Could not load file or assembly 'System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'.
+```
